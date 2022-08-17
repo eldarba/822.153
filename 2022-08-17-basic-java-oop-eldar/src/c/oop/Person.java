@@ -6,17 +6,22 @@ public class Person {
 	private int id;
 	private String name;
 	private int age;
-	
+
 	// constructor 1
 	public Person() {
-		
+
 	}
-	
+
 	// constructor 2
 	public Person(int id, String name, int age) {
 		setId(id);
 		setName(name);
 		setAge(age);
+	}
+
+	// constructor 3
+	public Person(int id) {
+		setId(id);
 	}
 
 	// methods
