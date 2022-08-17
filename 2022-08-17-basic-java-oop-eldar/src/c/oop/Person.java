@@ -9,7 +9,6 @@ public class Person {
 
 	// constructor 1
 	public Person() {
-
 	}
 
 	// constructor 2
