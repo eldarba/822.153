@@ -1,30 +1,44 @@
 package c.oop;
 
 public class Person {
-	
+
 	// attributes - define the object set of data
 	private int id;
 	private String name;
 	private int age;
-	
-	public void setAge(int theNewAge) {
-		if(theNewAge >= 0 && theNewAge <= 120) {
-			age = theNewAge;
+
+	public void print() {
+		System.out.println("Person [id=" + id + ", name=" + name + ", age=" + age + "]");
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		if (id >= 0) {
+			this.id = id;
 		}
 	}
-	
-	
-	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		if (name.length() < 25) {
+			this.name = name;
+		}
+	}
+
 	public int getAge() {
 		return age;
 	}
-	
-	public void setName(String theNewName) {
-		if(theNewName.length() < 25) {
-			name = theNewName;
+
+	public void setAge(int age) {
+		if (age >= 0 && age <= 120) {
+			this.age = age;
 		}
 	}
-	
-	
 
 }
