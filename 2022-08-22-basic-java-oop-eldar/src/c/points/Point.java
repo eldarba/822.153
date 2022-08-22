@@ -39,4 +39,12 @@ public class Point {
 		System.out.println("(" + x + ", " + y + ")");
 	}
 
+	public int getX() {
+		return x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
 }
