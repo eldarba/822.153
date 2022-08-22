@@ -21,7 +21,13 @@ public class Test1 {
 
 		// print all animal types and ages
 		for (int i = 0; i < animals.length; i++) {
-			System.out.println(animals[i].getClass().getSimpleName() + ": age " + animals[i].age);
+			// System.out.println(animals[i].getClass().getSimpleName() + ": age " +
+			// animals[i].age);
+			animals[i].speak();
+			if (animals[i] instanceof Cat) {
+				Cat cat = (Cat) animals[i];
+				cat.climb();
+			}
 		}
 
 	}
