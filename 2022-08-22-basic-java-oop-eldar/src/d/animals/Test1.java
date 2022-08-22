@@ -24,6 +24,7 @@ public class Test1 {
 			// System.out.println(animals[i].getClass().getSimpleName() + ": age " +
 			// animals[i].age);
 			animals[i].speak();
+			// with instanceof operator we check if current animal is Cat
 			if (animals[i] instanceof Cat) {
 				Cat cat = (Cat) animals[i];
 				cat.climb();
