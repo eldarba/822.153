@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Tar {
 
 	public static void main(String[] args) {
-		int length = 5;
+		int length = 10;
 		// 1. create arrays
 		int[] nums1 = new int[length];
 		int[] nums2 = new int[length];
@@ -15,8 +15,8 @@ public class Tar {
 			nums2[i] = (int) (Math.random() * 10);
 		}
 
-//		nums1 = new int[] { 1, 1, 9, 1, 1 };
-//		nums2 = new int[] { 1, 1, 1, 9, 1 };
+//		nums1 = new int[] { 1, 1, 9, 5, 3 };
+//		nums2 = new int[] { 5, 1, 3, 6, 4 };
 
 		// 2. print arrays
 		System.out.println(Arrays.toString(nums1));
@@ -76,6 +76,43 @@ public class Tar {
 		}
 
 		System.out.println("highest 3 digit: " + x);
+
+		// 7. even numbers
+		boolean found = false;
+		int evenDigits = 0;
+		for (int digit = 8; digit >= 0; digit -= 2) {
+			for (int i = 0; i < nums1.length; i++) {
+				if (nums1[i] == digit) {
+					evenDigits *= 10;
+					evenDigits += digit;
+					found = true;
+					break;
+				}
+			}
+		}
+		if (found) {
+			System.out.println("evens: " + evenDigits);
+		} else {
+			System.out.println("no even digits found in nums 1");
+		}
+		// 8. odd numbers
+		found = false;
+		int oddDigits = 0;
+		for (int digit = 9; digit >= 1; digit -= 2) {
+			for (int i = 0; i < nums2.length; i++) {
+				if (nums2[i] == digit) {
+					oddDigits *= 10;
+					oddDigits += digit;
+					found = true;
+					break;
+				}
+			}
+		}
+		if (found) {
+			System.out.println("odds: " + oddDigits);
+		} else {
+			System.out.println("no odd digits found in nums2");
+		}
 
 	}
 
