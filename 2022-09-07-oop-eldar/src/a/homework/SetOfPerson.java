@@ -31,7 +31,7 @@ public class SetOfPerson {
 		int bucketIndex = hashcode % matrix.length;
 		Person[] bucket = matrix[bucketIndex];
 		for (int i = 0; i < bucket.length; i++) {
-			if (bucket[i] != null && bucket[i].getId() == person.getId()) {
+			if (bucket[i] != null && bucket[i].equals(person)) {
 				return true;
 			}
 		}
