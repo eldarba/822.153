@@ -9,8 +9,9 @@ public class Point {
 	public final int index = ++c;
 	private int x;
 	private int y;
+	private String name;
 
-	{ // initializer - runs before CTOR
+	{ // initializer - runs before CTOR - can be used to initialize fields
 //		c++;
 	}
 
@@ -18,11 +19,12 @@ public class Point {
 //		c++;
 	}
 
-	public Point(int x, int y) {
+	public Point(String name, int x, int y) {
 		super();
 //		c++;
 		setX(x);
 		setY(y);
+		this.name = name;
 	}
 
 	public int getX() {
@@ -51,9 +53,7 @@ public class Point {
 
 	@Override
 	public String toString() {
-		return "Point [index=" + index + ", x=" + x + ", y=" + y + "]";
+		return "Point [index=" + index + ", name: " + name + ", x=" + x + ", y=" + y + "]";
 	}
-	
-	
 
 }
