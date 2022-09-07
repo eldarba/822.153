@@ -44,7 +44,7 @@ public class Track {
 
 	@Override
 	public String toString() {
-		return "Track [name=" + name + "]"; 
+		return "Track name=" + name + " - number of points: " + ind; 
 	}
 
 }
