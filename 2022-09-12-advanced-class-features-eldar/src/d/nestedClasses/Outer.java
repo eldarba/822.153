@@ -18,7 +18,8 @@ public class Outer {
 
 		{
 			System.out.println(x);
-			// System.out.println(y); // error - static members are not dependent on dynamic members
+			// System.out.println(y); // error - static members are not dependent on dynamic
+			// members
 		}
 	}
 
