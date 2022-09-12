@@ -130,7 +130,7 @@ public class Client {
 	public void autoUpdateAccounts() {
 		for (int i = 0; i < accounts.length; i++) {
 			Account curr = accounts[i];
-			if(curr != null) {
+			if (curr != null) {
 				float interest = curr.getBalance() * interestRate;
 				this.balance += interest;
 				// log the operation - for each account found (not null)
@@ -142,6 +142,16 @@ public class Client {
 				//
 			}
 		}
+	}
+
+	public float getFortune() {
+		float fortune = (float) this.balance;
+		for (int i = 0; i < accounts.length; i++) {
+			if (this.accounts[i] != null) {
+				fortune += this.accounts[i].getBalance();
+			}
+		}
+		return fortune;
 	}
 
 	public String getName() {
