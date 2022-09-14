@@ -2,7 +2,6 @@ package zoo.tests;
 
 import java.util.Arrays;
 
-import zoo.Mammal;
 import zoo.Zoo;
 import zoo.concrete.Ant;
 import zoo.concrete.Bat;
@@ -21,9 +20,10 @@ public class Test2 {
 		zoo.addAnimal(new Ant());
 		zoo.addAnimal(new Bat());
 		zoo.addAnimal(new Cat());
-		
-		Mammal[] zooMammals = zoo.getMammals();
-		System.out.println(Arrays.toString(zooMammals));
+
+		System.out.println(Arrays.toString(zoo.getMammals()));
+		System.out.println(Arrays.toString(zoo.getMammalsThatAreNotFlyers()));
+		System.out.println(Arrays.toString(zoo.getInsectsThatAreNotFlyers()));
 
 	}
 
