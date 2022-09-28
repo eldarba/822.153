@@ -1,9 +1,12 @@
 package b.sortingLists;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Person implements Comparable<Person> {
+public class Person implements Comparable<Person>, Serializable {
 
+	
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String name;
 	private int age;
