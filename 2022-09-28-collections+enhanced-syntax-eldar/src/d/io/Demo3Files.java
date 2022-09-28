@@ -7,6 +7,7 @@ public class Demo3Files {
 
 	public static void main(String[] args) throws IOException {
 
+		// the File class - represents directory or file (location on FS)
 		File dir = new File("c:/temp");
 		File file = new File(dir, "letter.txt");
 
