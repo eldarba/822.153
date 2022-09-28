@@ -53,9 +53,15 @@ public class Demo1 {
 			list.add(new Person(105, "bbb", 25));
 			list.add(new Person(107, "aaa", 30));
 			list.add(new Person(103, "ccc", 41));
+			System.out.println("insert order");
 			System.out.println(list);
 			
+			System.out.println("natural order (id)");
 			Collections.sort(list);
+			System.out.println(list);
+
+			System.out.println("other order (name)");
+			Collections.sort(list, new PersonNameComparator());
 			System.out.println(list);
 		}
 

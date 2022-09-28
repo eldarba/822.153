@@ -61,27 +61,16 @@ public class Person implements Comparable<Person> {
 		return "Person [id=" + id + ", name=" + name + ", age=" + age + "]";
 	}
 
-//	@Override
-//	public int compareTo(Person other) {
-//		return this.name.compareTo(other.name);
-//	}
 	@Override
 	public int compareTo(Person other) {
-		Integer id1 = this.id;
-		Integer id2 = other.id;
-		return id1.compareTo(id2);
-	} 
+		if (this.id < other.id) {
+			return -1;
+		} else if (this.id > other.id) {
+			return 1;
+		} else {
+			return 0;
+		}
 
-//	@Override
-//	public int compareTo(Person other) {
-//		if (this.id < other.id) {
-//			return -1;
-//		} else if (this.id > other.id) {
-//			return 1;
-//		} else {
-//			return 0;
-//		}
-//
-//	}
+	}
 
 }
