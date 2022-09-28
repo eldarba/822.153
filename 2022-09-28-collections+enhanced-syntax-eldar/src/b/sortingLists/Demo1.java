@@ -63,6 +63,10 @@ public class Demo1 {
 			System.out.println("other order (name)");
 			Collections.sort(list, new PersonNameComparator());
 			System.out.println(list);
+
+			System.out.println("other order (age)");
+			Collections.sort(list, new PersonAgeComparator());
+			System.out.println(list); 
 		}
 
 	}
