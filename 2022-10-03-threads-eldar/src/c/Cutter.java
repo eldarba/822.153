@@ -5,17 +5,24 @@ import java.util.concurrent.TimeUnit;
 
 public class Cutter extends Thread {
 
+	private Builder builder;
+
+	public Cutter(Builder builder) {
+		super();
+		this.builder = builder;
+	}
+
 	@Override
 	public void run() {
-		Random random = new Random();
-		for (int i = 0; i < 5; i++) {
-			try {
-				int seconds = random.nextInt(3, 7);
-				TimeUnit.SECONDS.sleep(seconds); 
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+		try {
+			Random random = new Random();
+			TimeUnit.SECONDS.sleep(random.nextInt(3, 7));
+			while (builder.isAlive()) {
+				System.out.println();
+				TimeUnit.SECONDS.sleep(random.nextInt(3, 7));
 			}
-			System.out.println();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 	}
 
