@@ -2,7 +2,6 @@ package app.core;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -15,7 +14,7 @@ import app.core.data.Person;
 public class PersonController {
 
 	private List<Person> persons = new ArrayList<>();
-	
+
 	// CRUD operations
 
 	// CREATE
@@ -34,9 +33,9 @@ public class PersonController {
 		}
 		return null;
 	}
-	
+
 	// READ
-	public List<Person> getAll(){
+	public List<Person> getAll() {
 		return this.persons;
 	}
 
@@ -56,7 +55,7 @@ public class PersonController {
 		Person person = new Person();
 		person.setId(personId);
 		persons.remove(person);
-		
+
 //		Iterator<Person> it = persons.iterator();
 //		while (it.hasNext()) {
 //			Person curr = it.next();
@@ -66,7 +65,7 @@ public class PersonController {
 //			}
 //		}
 	}
-	
+
 	public void save() {
 		File file = new File("files/persons.data");
 		try {
@@ -77,7 +76,7 @@ public class PersonController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void load() {
 		File file = new File("files/persons.data");
 		try {
@@ -86,16 +85,7 @@ public class PersonController {
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }
