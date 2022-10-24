@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,8 +50,9 @@ public class UserDaoDb implements UserDao {
 				user.setName(rs.getString("name"));
 				user.setEmail(rs.getString("email"));
 				return user;
+			} else {
+				throw new UsersException("read user faild - id " + id + " not found");
 			}
-			return null;
 		} catch (SQLException e) {
 			throw new UsersException("read user failed", e);
 		}
@@ -58,8 +60,22 @@ public class UserDaoDb implements UserDao {
 
 	@Override
 	public List<User> readAll() throws UsersException {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from users";
+		try (Connection con = DriverManager.getConnection(dbUrl, dbUser, dbPassword)) {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			List<User> users = new ArrayList<>();
+			while (rs.next()) {
+				User user = new User();
+				user.setId(rs.getInt("id"));
+				user.setName(rs.getString("name"));
+				user.setEmail(rs.getString("email"));
+				users.add(user);
+			}
+			return users;
+		} catch (SQLException e) {
+			throw new UsersException("read all failed", e);
+		}
 	}
 
 	@Override
