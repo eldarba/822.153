@@ -39,8 +39,21 @@ public class UserDaoDb implements UserDao {
 
 	@Override
 	public User read(int id) throws UsersException {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select * from users where id = " + id;
+		try (Connection con = DriverManager.getConnection(dbUrl, dbUser, dbPassword)) {
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			if (rs.next()) {
+				User user = new User();
+				user.setId(id);
+				user.setName(rs.getString("name"));
+				user.setEmail(rs.getString("email"));
+				return user;
+			}
+			return null;
+		} catch (SQLException e) {
+			throw new UsersException("read user failed", e);
+		}
 	}
 
 	@Override
