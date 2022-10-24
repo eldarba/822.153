@@ -2,7 +2,9 @@ package b;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 /**
@@ -22,9 +24,15 @@ public class UserDaoDb implements UserDao {
 	public int create(User user) throws UsersException {
 		String sql = "insert into users values(0, '" + user.getName() + "', '" + user.getEmail() + "')";
 		try(Connection con = DriverManager.getConnection(dbUrl, dbUser, dbPassword);) {
-			
-			return 0;
+			Statement stmt = con.createStatement();
+			stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+			ResultSet rsKeys = stmt.getGeneratedKeys();
+			rsKeys.next();
+			int id = rsKeys.getInt(1);
+			user.setId(id); // set the user id from the database
+			return id; // return the generated id
 		} catch (SQLException e) {
+			System.out.println(sql);
 			throw new UsersException("create user failed", e);
 		}
 	}
