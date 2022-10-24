@@ -15,7 +15,7 @@ import java.util.List;
  *
  */
 public class UserDaoDb implements UserDao {
-	
+
 	private String dbUrl = "jdbc:mysql://localhost:3306/db3";
 	private String dbUser = "root";
 	private String dbPassword = "1234";
@@ -23,7 +23,7 @@ public class UserDaoDb implements UserDao {
 	@Override
 	public int create(User user) throws UsersException {
 		String sql = "insert into users values(0, '" + user.getName() + "', '" + user.getEmail() + "')";
-		try(Connection con = DriverManager.getConnection(dbUrl, dbUser, dbPassword);) {
+		try (Connection con = DriverManager.getConnection(dbUrl, dbUser, dbPassword);) {
 			Statement stmt = con.createStatement();
 			stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
 			ResultSet rsKeys = stmt.getGeneratedKeys();
@@ -51,14 +51,27 @@ public class UserDaoDb implements UserDao {
 
 	@Override
 	public void update(User user) throws UsersException {
-		// TODO Auto-generated method stub
+		String sql = "update users set name = '" + user.getName() + "', email = '" + user.getEmail() + "' ";
+		sql += "where id = " + user.getId();
+		try (Connection con = DriverManager.getConnection(dbUrl, dbUser, dbPassword)) {
+			Statement stmt = con.createStatement();
+			stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			throw new UsersException("update user failed", e);
+		}
 
 	}
 
 	@Override
 	public void delete(int id) throws UsersException {
-		// TODO Auto-generated method stub
-
+		String sql = "delete from users where id = " + id;
+		try (Connection con = DriverManager.getConnection(dbUrl, dbUser, dbPassword);) {
+			Statement stmt = con.createStatement();
+			stmt.executeUpdate(sql);
+		} catch (SQLException e) {
+			System.out.println(sql);
+			throw new UsersException("delete user failed", e);
+		}
 	}
 
 }
