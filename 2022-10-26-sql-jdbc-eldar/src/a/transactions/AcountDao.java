@@ -1,11 +1,13 @@
 package a.transactions;
 
+import java.sql.Connection;
+
 public interface AcountDao {
 
-	void deposit(int accountId, double amount);
+	void deposit(Connection con, int accountId, double amount);
 
-	void withdraw(int accountId, double amount);
+	void withdraw(Connection con, int accountId, double amount);
 	
-	double getBalance(int accountId);
+	double getBalance(Connection con, int accountId);
 
 }

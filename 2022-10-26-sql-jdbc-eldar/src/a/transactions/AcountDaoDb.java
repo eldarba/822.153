@@ -7,18 +7,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AcountDaoDb implements AcountDao {
-	private String dbUrl = "jdbc:mysql://localhost:3306/db3";
-	private String dbUser = "root";
-	private String dbPassword = "1234";
+	
 
 	@Override
-	public void deposit(int accountId, double amount) {
-		try (Connection con = DriverManager.getConnection(dbUrl, dbUser, dbPassword);) {
-			String sql = "update `account` set balance = balance + ? where id = ?";
-			PreparedStatement pstmt = con.prepareStatement(sql);
+	public void deposit(Connection con, int accountId, double amount) {
+		String sql = "update `account` set balance = balance + ? where id = ?";
+		try (PreparedStatement pstmt = con.prepareStatement(sql);) {
+
+			// test what happens in case something goes wrong
 			if (Math.random() < 0.5) {
 				throw new RuntimeException("deposit failed - test error");
 			}
+			//
+
 			pstmt.setDouble(1, amount);
 			pstmt.setInt(2, accountId);
 			pstmt.executeUpdate();
@@ -29,13 +30,13 @@ public class AcountDaoDb implements AcountDao {
 	}
 
 	@Override
-	public void withdraw(int accountId, double amount) {
-		try (Connection con = DriverManager.getConnection(dbUrl, dbUser, dbPassword);) {
-			String sql = "update `account` set balance = balance - ? where id = ?";
-			PreparedStatement pstmt = con.prepareStatement(sql);
-			if (Math.random() < 0.5) {
-				throw new RuntimeException("withdraw failed - test error");
-			}
+	public void withdraw(Connection con, int accountId, double amount) {
+		String sql = "update `account` set balance = balance - ? where id = ?";
+		try (PreparedStatement pstmt = con.prepareStatement(sql);) {
+
+//			if (Math.random() < 0.5) {
+//				throw new RuntimeException("withdraw failed - test error");
+//			}
 			pstmt.setDouble(1, amount);
 			pstmt.setInt(2, accountId);
 			pstmt.executeUpdate();
@@ -46,10 +47,10 @@ public class AcountDaoDb implements AcountDao {
 	}
 
 	@Override
-	public double getBalance(int accountId) {
+	public double getBalance(Connection con, int accountId) {
 		String sql = "select balance from account where id = ?";
-		try (Connection con = DriverManager.getConnection(dbUrl, dbUser, dbPassword);) {
-			PreparedStatement pstmt = con.prepareStatement(sql);
+		try (PreparedStatement pstmt = con.prepareStatement(sql);) {
+			
 			pstmt.setInt(1, accountId);
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
