@@ -9,7 +9,7 @@ public class Test {
 		// create a spring container object
 		// we want to use annotations configuration
 		System.out.println("start a container");
-		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(Config.class);
 		
 		Person p = ctx.getBean(Person.class);
 		System.out.println(p);
