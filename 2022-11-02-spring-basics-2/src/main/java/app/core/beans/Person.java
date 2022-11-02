@@ -1,6 +1,5 @@
 package app.core.beans;
 
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -11,10 +10,6 @@ public class Person {
 	private int id;
 	private String name;
 	private int age;
-	
-	{
-		System.out.println("Person CTOR");
-	}
 
 	@Override
 	public String toString() {
@@ -44,7 +39,5 @@ public class Person {
 	public void setAge(int age) {
 		this.age = age;
 	}
-	
-	
 
 }
