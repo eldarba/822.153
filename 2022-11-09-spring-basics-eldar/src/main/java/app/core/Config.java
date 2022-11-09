@@ -17,8 +17,7 @@ public class Config {
 
 	@Bean
 	public Car sportsCar(@Qualifier("turboEngine") Engine engine) {
-		FamilyCar car = new FamilyCar();
-		car.setEngine(engine);
+		FamilyCar car = new FamilyCar(engine);
 		return car;
 	}
 

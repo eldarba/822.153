@@ -10,11 +10,15 @@ import org.springframework.stereotype.Component;
 @Scope("prototype")
 public class FamilyCar implements Car {
 
-	@Autowired
-	@Qualifier("basicEngine")
 	private Engine engine;
 	@Value("${car.max.speed}")
 	private int maxSpeed;
+	
+	@Autowired
+	public FamilyCar(@Qualifier("basicEngine") Engine engine) {
+		super();
+		this.engine = engine;
+	}
 
 	@Override
 	public void start() {
@@ -30,7 +34,7 @@ public class FamilyCar implements Car {
 			System.out.println("Error - speed limit is " + maxSpeed);
 		}
 	}
- 
+
 	@Override
 	public void stop() {
 		System.out.println("family car stopped");
@@ -45,7 +49,5 @@ public class FamilyCar implements Car {
 	public void setEngine(Engine engine) {
 		this.engine = engine;
 	}
-	
-	
 
 }
