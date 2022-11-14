@@ -8,14 +8,15 @@ public class App2 {
 
 	public static void main(String[] args) {
 
-		AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(Config.class);
+		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(Config.class);) {
+			CompanyFacade companyFacade = ctx.getBean(CompanyFacade.class);
 
-		CompanyFacade companyFacade = ctx.getBean(CompanyFacade.class);
+			int count = companyFacade.addCoupon(); // calling a business method
 
-		int count = companyFacade.addCoupon();
-		System.out.println(count);
-
-		ctx.close();
+			System.out.println(count); // print what the business method returned
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+		}
 
 	}
 
