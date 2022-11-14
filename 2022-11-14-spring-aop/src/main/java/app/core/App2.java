@@ -12,7 +12,8 @@ public class App2 {
 
 		CompanyFacade companyFacade = ctx.getBean(CompanyFacade.class);
 
-		companyFacade.addCoupon();
+		int count = companyFacade.addCoupon();
+		System.out.println(count);
 
 		ctx.close();
 
