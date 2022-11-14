@@ -13,4 +13,8 @@ public class CustomerFacade {
 		System.out.println("coupon " + id + " used");
 	}
 
-}  
+	public void useDiscount() {
+		System.out.println("discount used");
+	}
+
+}
