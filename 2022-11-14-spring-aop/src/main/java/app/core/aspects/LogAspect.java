@@ -2,6 +2,7 @@ package app.core.aspects;
 
 import java.time.LocalDateTime;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
@@ -22,8 +23,8 @@ public class LogAspect {
 	// (.) - one parameter of any type
 	// (..) - 0 or more parameters of any type
 	@Before("execution(void use*(..))")
-	public void beforeUse() {
-		System.out.println(">>> before use: " + LocalDateTime.now());
+	public void beforeUse(JoinPoint jp) {
+		System.out.println(">>> before : " + jp.getSignature().getName() + ": " + LocalDateTime.now());
 	}
 
 }

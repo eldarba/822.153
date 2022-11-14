@@ -13,7 +13,6 @@ public class App1 {
 
 		CompanyFacade companyFacade = ctx.getBean(CompanyFacade.class);
 		CustomerFacade customerFacade = ctx.getBean(CustomerFacade.class);
-		System.out.println(customerFacade.getClass().getSimpleName());
 
 		companyFacade.addCoupon();
 		companyFacade.removeCoupon(109);
