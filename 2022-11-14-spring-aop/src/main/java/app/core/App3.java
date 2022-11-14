@@ -16,7 +16,7 @@ public class App3 {
 			CustomerFacade customerFacade = ctx.getBean(CustomerFacade.class);
 			LoginManager loginManager = ctx.getBean(LoginManager.class);
 
-			loginManager.login("1234");
+			loginManager.login("123");
 
 			companyFacade.addCoupon();
 			companyFacade.removeCoupon(109);

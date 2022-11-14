@@ -2,7 +2,10 @@ package app.core.facades;
 
 import org.springframework.stereotype.Component;
 
+import app.core.annotations.MyAnnotation;
+
 @Component
+@MyAnnotation
 public class CompanyFacade {
 
 	public int addCoupon() {
