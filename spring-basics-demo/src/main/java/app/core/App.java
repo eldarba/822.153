@@ -1,6 +1,7 @@
 package app.core;
 
-import org.springframework.context.ApplicationContext;
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,7 +17,7 @@ public class App {
 	public static void main(String[] args) {
 
 		// the general interface for spring container
-		ApplicationContext ctx;
+		AnnotationConfigApplicationContext ctx;
 		// one of several implementations for spring container
 		ctx = new AnnotationConfigApplicationContext(App.class);
 		System.out.println("spring container is up");
@@ -41,6 +42,14 @@ public class App {
 		Person p2 = ctx.getBean("yakov", Person.class);
 		p2.speak();
 		System.out.println("age is " + p2.age);
+
+		System.out.println("============================");
+		try {
+			TimeUnit.SECONDS.sleep(8);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		ctx.close();
 
 	}
 
