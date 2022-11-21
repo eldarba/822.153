@@ -68,7 +68,7 @@ public class AppService {
 		}
 	}
 
-	public List<Student> gatAllStudents() {
+	public List<Student> getAllStudents() {
 		return this.studentRepository.findAll();
 	}
 

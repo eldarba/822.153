@@ -4,13 +4,12 @@ import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 
 import app.core.entities.Student;
 import app.core.entities.Student.Subject;
 import app.core.repositories.StudentRepository;
 
-@Component
+//@Component
 public class StudentRepositoryTest implements CommandLineRunner {
 
 	@Autowired
