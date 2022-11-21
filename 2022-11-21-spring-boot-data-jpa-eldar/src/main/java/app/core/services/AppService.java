@@ -1,5 +1,6 @@
 package app.core.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -57,6 +58,18 @@ public class AppService {
 		} else {
 			throw new RuntimeException("student not found - " + student.getId());
 		}
+	}
+
+	public void deleteStudent(int id) {
+		if (this.studentRepository.existsById(id)) {
+			this.studentRepository.deleteById(id);
+		} else {
+			throw new RuntimeException("delete failed - not found - " + id);
+		}
+	}
+
+	public List<Student> gatAllStudents() {
+		return this.studentRepository.findAll();
 	}
 
 }
