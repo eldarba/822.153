@@ -4,11 +4,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import app.core.entities.Student;
 
-@Component
+// @Component
 public class StudentDao {
 
 	@Autowired
