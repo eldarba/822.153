@@ -48,6 +48,7 @@ public class University {
 		if (students == null) {
 			students = new ArrayList<>();
 		}
+		student.setUniversity(this); // link the student to the university
 		students.add(student);
 	}
 
