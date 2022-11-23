@@ -1,5 +1,6 @@
 package app.core.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -30,8 +31,15 @@ public class Company {
 	private int id;
 	private String name;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "company_id")
 	private List<Employee> employees;
+
+	public void addEmployee(Employee employee) {
+		if (this.employees == null) {
+			this.employees = new ArrayList<>();
+		}
+		this.employees.add(employee);
+	}
 
 }
