@@ -1,6 +1,7 @@
 package b.streams;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Demo4 {
@@ -25,6 +26,9 @@ public class Demo4 {
 		}).forEach(p -> {
 		});
 		System.out.println(list);
+
+		long count = Arrays.asList(1, 2, 3).stream().peek(System.out::println).filter(x -> x > 10).count();
+		System.out.println(count);
 
 	}
 
