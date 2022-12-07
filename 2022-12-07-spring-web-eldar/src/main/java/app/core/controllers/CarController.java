@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import app.core.models.Car;
 
@@ -53,13 +54,13 @@ public class CarController {
 	// update a resource on the server - HTTP Put method
 	@PutMapping
 	public Car updateCar(Car car) {
-		Car carInMemory = (Car) getCar(car.getNumber()).getBody();
-		if (carInMemory != null) {
+		try {
+			Car carInMemory = (Car) getCar(car.getNumber()).getBody();
 			carInMemory.setColor(car.getColor());
 			carInMemory.setMake(car.getMake());
 			return carInMemory;
-		} else {
-			return null;
+		} catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "car number " + car.getNumber() + " not found");
 		}
 	}
 
