@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,6 +25,15 @@ import app.core.models.Car;
 @RequestMapping("/api/cars")
 public class CarController {
 	private List<Car> cars = new ArrayList<>();
+
+	@Autowired
+	private ConfigurableApplicationContext ctx;
+
+	// http://localhost:8080/api/cars/x
+	@GetMapping("/x")
+	public void shutServerDown() {
+		ctx.close();
+	}
 
 	// create a resource on the server - HTTP Post method
 	@PostMapping
@@ -66,15 +77,28 @@ public class CarController {
 
 	// delete a resource on the server - HTTP Delete method
 	@DeleteMapping
-	public boolean deleteCar(int number) {
+	public ResponseEntity<String> deleteCar(int number) {
 		Iterator<Car> it = cars.iterator();
 		while (it.hasNext()) {
 			if (it.next().getNumber() == number) {
 				it.remove();
-				return true;
+				return ResponseEntity.ok("the car was removed");
 			}
 		}
-		return false;
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("the car was NOT removed");
+	}
+
+	// delete a resource on the server - HTTP Delete method
+	@DeleteMapping("/2")
+	public String deleteCar2(int number) {
+		Iterator<Car> it = cars.iterator();
+		while (it.hasNext()) {
+			if (it.next().getNumber() == number) {
+				it.remove();
+				return "the car was removed";
+			}
+		}
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND, "the car was NOT removed");
 	}
 
 	@PostConstruct // life cycle hook method
