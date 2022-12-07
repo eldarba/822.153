@@ -9,9 +9,11 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,8 +46,8 @@ public class CarController {
 	}
 
 	// get a resource from the server - HTTP Get method
-	@GetMapping("/{number}")
-	public ResponseEntity<?> getCar(int number) {
+	@GetMapping(path = "/{number}", produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<?> getCar(@PathVariable int number) {
 		Car car = new Car();
 		car.setNumber(number);
 		int index = this.cars.indexOf(car);
