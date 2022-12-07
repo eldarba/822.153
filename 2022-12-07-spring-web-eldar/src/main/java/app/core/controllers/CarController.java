@@ -3,6 +3,7 @@ package app.core.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,4 +24,16 @@ public class CarController {
 		return car;
 	}
 
+	// get a resource from the server - HTTP Get method
+	@GetMapping("/{number}")
+	public Car getCar(int number) {
+		Car car = new Car();
+		car.setNumber(number);
+		int index = this.cars.indexOf(car);
+		if (index != -1) {
+			return cars.get(index);
+		} else {
+			return null;
+		}
+	}
 }
