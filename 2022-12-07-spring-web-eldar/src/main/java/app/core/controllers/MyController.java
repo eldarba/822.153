@@ -1,5 +1,6 @@
 package app.core.controllers;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MyController {
 
 	// http://localhost/api/greet?name=Eldar
-	@GetMapping(path = "/greet", produces = "text/html") // set the content-type header to
+	@GetMapping(path = "/greet", produces = MediaType.TEXT_HTML_VALUE) // set the content-type header to
 	public String greet(String name) {
 		return "Hello<br>" + name;
 	}
