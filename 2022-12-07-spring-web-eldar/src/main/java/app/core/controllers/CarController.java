@@ -66,7 +66,7 @@ public class CarController {
 
 	// update a resource on the server - HTTP Put method
 	@PutMapping
-	public Car updateCar(Car car) {
+	public Car updateCar(@RequestBody Car car) {
 		try {
 			Car carInMemory = (Car) getCar(car.getNumber()).getBody();
 			carInMemory.setColor(car.getColor());
