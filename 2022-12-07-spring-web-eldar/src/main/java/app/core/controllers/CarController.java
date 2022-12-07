@@ -3,6 +3,8 @@ package app.core.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,5 +37,17 @@ public class CarController {
 		} else {
 			return null;
 		}
+	}
+
+	@GetMapping
+	public List<Car> getAll() {
+		return cars;
+	}
+
+	@PostConstruct
+	void init() {
+		cars.add(new Car(101, "Red", "Skoda"));
+		cars.add(new Car(102, "Green", "Porsh"));
+		cars.add(new Car(103, "Blue", "Mercedes"));
 	}
 }
