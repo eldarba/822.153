@@ -10,4 +10,6 @@ public interface LibraryRepository extends JpaRepository<Library, Integer> {
 
 	boolean existsByName(String libraryName);
 
+	boolean existsByIdAndBooksTitle(int libraryId, String bookName);
+
 }

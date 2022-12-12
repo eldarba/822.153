@@ -1,5 +1,6 @@
 package app.core.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -32,5 +33,13 @@ public class Library {
 	private String address;
 	@OneToMany(mappedBy = "library", cascade = CascadeType.ALL)
 	private List<Book> books;
+
+	public void addBook(Book book) {
+		if (books == null) {
+			books = new ArrayList<>();
+		}
+		book.setLibrary(this);
+		books.add(book);
+	}
 
 }

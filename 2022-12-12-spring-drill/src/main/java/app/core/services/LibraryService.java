@@ -1,9 +1,12 @@
 package app.core.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import app.core.entities.Book;
 import app.core.entities.Library;
 import app.core.exceptions.LibraryException;
 import app.core.repositories.BookRepository;
@@ -27,7 +30,7 @@ public class LibraryService {
 	 * @param library the library to add
 	 * @throws LibraryException if a library by this name already exists
 	 */
-	public void addLibrary(Library library) throws LibraryException {
+	public Library addLibrary(Library library) throws LibraryException {
 
 		if (libraryRepository.existsByName(library.getName())) {
 			throw new LibraryException("library name " + library.getName() + " already exists");
@@ -37,8 +40,36 @@ public class LibraryService {
 			throw new LibraryException("library id " + library.getId() + " already exists");
 		}
 
-		libraryRepository.save(library);
+		library = libraryRepository.save(library);
+		return library;
 
+	}
+
+	public void addBookToLibrary(Book book, int libraryId) throws LibraryException {
+		Library library = libraryRepository.findById(libraryId)
+				.orElseThrow(() -> new LibraryException("addBookToLibrary failed - library not found"));
+		if (libraryRepository.existsByIdAndBooksTitle(libraryId, book.getTitle())) {
+			throw new LibraryException("addBookToLibrary failed - this library already has this book title");
+		}
+		library.addBook(book);
+
+	}
+
+	public Library findLibrary(int libraryId) throws LibraryException {
+		return libraryRepository.findById(libraryId)
+				.orElseThrow(() -> new LibraryException("findLibrary failed - not found"));
+	}
+
+	public Book findBook(int bookId) throws LibraryException {
+		return bookRepository.findById(bookId).orElseThrow(() -> new LibraryException("findBook failed - not found"));
+	}
+
+	public List<Book> getAllBooks() {
+		return this.bookRepository.findAll();
+	}
+
+	public List<Book> getAllBooks(int libraryId) {
+		return this.bookRepository.findByLibraryId(libraryId);
 	}
 
 }
