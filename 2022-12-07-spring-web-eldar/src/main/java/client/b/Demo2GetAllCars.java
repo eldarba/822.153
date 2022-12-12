@@ -1,0 +1,37 @@
+package client.b;
+
+import java.net.URI;
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
+
+import app.core.models.Car;
+
+public class Demo2GetAllCars {
+
+	public static void main(String[] args) {
+
+		RestTemplate rt = new RestTemplate();
+
+		URI uri = URI.create("http://localhost:8080/api/cars");
+//		RequestEntity<Void> req = new RequestEntity<>(HttpMethod.GET, uri);
+		RequestEntity<Void> req = RequestEntity.get(uri).build();
+		try {
+			ResponseEntity<Car[]> res = rt.exchange(req, Car[].class);
+			System.out.println("================");
+			System.out.println(res.getStatusCode());
+			Car[] arr = res.getBody();
+			List<Car> list = Arrays.asList(arr);
+			System.out.println(list);
+		} catch (RestClientException e) {
+			System.out.println("================");
+			System.out.println("Error: " + e.getMessage());
+		}
+
+	}
+
+}
