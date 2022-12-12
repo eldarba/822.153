@@ -11,6 +11,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,9 +34,11 @@ public class Book {
 	private int id;
 	private String title;
 	private String author;
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn
 	private Library library;
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "reader_book", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "reader_id"))
 	private List<Reader> readers;

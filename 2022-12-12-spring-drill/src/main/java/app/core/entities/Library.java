@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,6 +33,7 @@ public class Library {
 	private int id;
 	private String name;
 	private String address;
+	@JsonIgnore
 	@OneToMany(mappedBy = "library", cascade = CascadeType.ALL)
 	private List<Book> books;
 
