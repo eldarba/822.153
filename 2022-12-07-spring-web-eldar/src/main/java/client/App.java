@@ -1,5 +1,8 @@
 package client;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -40,9 +43,10 @@ public class App {
 			System.out.println(word);
 			String url = "https://api.dictionaryapi.dev/api/v2/entries/en/" + word;
 			System.out.println(url);
-			String resp = rt.getForObject(url, String.class);
+			List<?> resp = rt.getForObject(url, ArrayList.class);
 			System.out.println(resp);
-			ta.setText(resp);
+			System.out.println(resp.getClass());
+//			ta.setText(resp);
 		});
 
 		fr.setVisible(true);
