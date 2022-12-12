@@ -44,8 +44,9 @@ public class App {
 			String url = "https://api.dictionaryapi.dev/api/v2/entries/en/" + word;
 			System.out.println(url);
 			List<?> resp = rt.getForObject(url, ArrayList.class);
-			System.out.println(resp);
+			System.out.println(resp.get(0));
 			System.out.println(resp.getClass());
+			System.out.println(resp.get(0).getClass());
 //			ta.setText(resp);
 		});
 
