@@ -51,4 +51,18 @@ public class MyController {
 		return arr[(int) (Math.random() * arr.length)];
 	}
 
+	@GetMapping("/hobbies")
+	public String sendHobbies(@RequestParam("fav-color") String favoritColor, String... hobbies) {
+		String response = "Your hobbies are: <ul>";
+		for (String hobby : hobbies) {
+			System.out.println(hobby);
+			response += "<li>" + hobby + "</li>";
+		}
+
+		response += "</ul>";
+
+		response += "favorite color: " + favoritColor;
+		return response;
+	}
+
 }
