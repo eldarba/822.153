@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>NATO phonetic alphabet</h1>
+
+    <fieldset>
+        <legend>random character</legend>
+        <!-- this form is not sending parameters -->
+        <form action="http://localhost:8080/api/random-char" target="response">
+            <input type="submit">
+        </form>
+    </fieldset>
+    
+    <fieldset>
+        <legend>specified character</legend>
+        <!-- this form is sending one parameter -->
+        <form action="http://localhost:8080/api/specified-char" target="response">
+            <input name="char" type="text" placeholder="enter a single character">
+            <input type="submit">
+        </form>
+    </fieldset>
+   
+    <fieldset>
+        <legend>convert message</legend>
+        <!-- this form is sending one parameter -->
+        <form action="http://localhost:8080/api/convert" target="response">
+            <input name="text" type="text" placeholder="enter text">
+            <input type="submit">
+        </form>
+    </fieldset>
+
+    <!-- this is where the response from server will be displayed -->
+    <br>
+    <iframe name="response" frameborder="1" style="width: 80%;"></iframe>
+</body>
+</html>
