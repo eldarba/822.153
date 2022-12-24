@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Forms</h1>
+    <h3>toggle buttons</h3>
+    <form action="http://localhost:8080/api/hobbies" target="resp">
+        <fieldset>
+            <legend>Hobbies</legend>
+            <input name="hobbies" value="running" id="running" type="checkbox"> <label for="running">Running</label>
+            <br>
+            <input name="hobbies" value="swimming" id="swimming" type="checkbox"> <label for="swimming">Swimming</label>
+            <br>
+            <input name="hobbies" value="singing" id="singing" type="checkbox"> <label for="singing">Singing</label>
+            <br>
+            <input name="hobbies" value="escape-rooms" id="escape-rooms" type="checkbox"> <label
+                for="escape-rooms">Escape Rooms</label>
+
+        </fieldset>
+        <fieldset>
+            <legend>favorite color</legend>
+            <input id="black" name="fav-color" value="black" type="radio"><label for="black">Black</label><br>
+            <input id="white" name="fav-color" value="white" type="radio"><label for="white">White</label><br>
+            <input id="red" name="fav-color" value="red" type="radio"><label for="red">Red</label><br>
+            <input id="green" name="fav-color" value="green" type="radio"><label for="green">Green</label><br>
+        </fieldset>
+        <br>
+        <input value="send the hobbies  and favorite color to the server" type="submit">
+        <input type="reset">
+    </form>
+
+    <br>
+    <iframe name="resp" frameborder="1" style="width: 80%;"></iframe>
+</body>
+
+</html>
