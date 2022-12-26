@@ -1,5 +1,6 @@
 package app.core.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -40,8 +41,23 @@ public class EntryWord {
 		this.definition = definition;
 		this.sentences = sentences;
 		for (ExampleSentence exampleSentence : this.sentences) {
-			exampleSentence.setEntryWord(this);
+			exampleSentence.setEntryWord(this); // bind the example with the word
 		}
+	}
+
+	public void addExampleSentence(ExampleSentence exampleSentence) {
+		if (this.sentences == null) {
+			this.sentences = new ArrayList<>();
+		}
+		exampleSentence.setEntryWord(this); // bind the example with the word
+		this.sentences.add(exampleSentence);
+	}
+
+	public void setSenteces(List<ExampleSentence> sentences) {
+		for (ExampleSentence exampleSentence : sentences) {
+			exampleSentence.setEntryWord(this); // bind the example with the word
+		}
+		this.sentences = sentences;
 	}
 
 }
