@@ -3,6 +3,7 @@ package app.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,7 +21,7 @@ class DictionaryDrillWebApplicationTests {
 
 	@Test
 	void testAddEntryWord() throws DictionaryException {
-		System.out.println("=== start test add entry word");
+		System.out.println("=== start test add new entry word");
 
 		List<ExampleSentence> exampleSentences = new ArrayList<>();
 
@@ -29,7 +30,17 @@ class DictionaryDrillWebApplicationTests {
 
 		EntryWord word = new EntryWord(0, "Cat", "a nice animal that do meow", exampleSentences);
 
-		dictionary.addWordToDictionary(word);
+		EntryWord entryWord = dictionary.addWordToDictionary(word);
+
+		int expectedEntryWordId = 1;
+		int actualEntryWordId = entryWord.getId();
+		Assertions.assertEquals(expectedEntryWordId, actualEntryWordId, "the first id should be 1");
+
+		System.out.println("=== start test add existing entry word");
+		DictionaryException e = Assertions.assertThrows(DictionaryException.class,
+				() -> dictionary.addWordToDictionary(entryWord));
+		System.out.println(e);
+
 	}
 
 }
