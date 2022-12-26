@@ -14,14 +14,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import app.core.entities.EntryWord;
 import app.core.entities.ExampleSentence;
 import app.core.exceptions.DictionaryException;
-import app.core.services.Dictionary;
+import app.core.services.DictionaryService;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class DictionaryDrillWebApplicationTests {
 
 	@Autowired
-	private Dictionary dictionary;
+	private DictionaryService dictionary;
 
 	@Test
 	@Order(1)

@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,6 +28,7 @@ public class ExampleSentence {
 	private int id;
 	private String example;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn
 	private EntryWord entryWord;

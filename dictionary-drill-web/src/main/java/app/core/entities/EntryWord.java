@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -31,6 +33,7 @@ public class EntryWord {
 	private String word;
 	private String definition;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "entryWord", cascade = CascadeType.ALL)
 	private List<ExampleSentence> sentences;
 
