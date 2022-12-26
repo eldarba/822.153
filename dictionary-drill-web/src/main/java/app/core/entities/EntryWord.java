@@ -11,8 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -33,7 +31,7 @@ public class EntryWord {
 	private String word;
 	private String definition;
 
-	@JsonIgnore
+//	@JsonIgnore
 	@OneToMany(mappedBy = "entryWord", cascade = CascadeType.ALL)
 	private List<ExampleSentence> sentences;
 
@@ -43,8 +41,10 @@ public class EntryWord {
 		this.word = word;
 		this.definition = definition;
 		this.sentences = sentences;
-		for (ExampleSentence exampleSentence : this.sentences) {
-			exampleSentence.setEntryWord(this); // bind the example with the word
+		if (sentences != null) {
+			for (ExampleSentence exampleSentence : this.sentences) {
+				exampleSentence.setEntryWord(this); // bind the example with the word
+			}
 		}
 	}
 
@@ -56,7 +56,8 @@ public class EntryWord {
 		this.sentences.add(exampleSentence);
 	}
 
-	public void setSenteces(List<ExampleSentence> sentences) {
+//	public void setSenteces(List<ExampleSentence> sentences) {
+	public void setSentences(List<ExampleSentence> sentences) {
 		for (ExampleSentence exampleSentence : sentences) {
 			exampleSentence.setEntryWord(this); // bind the example with the word
 		}
