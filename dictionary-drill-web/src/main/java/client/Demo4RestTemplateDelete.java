@@ -2,7 +2,6 @@ package client;
 
 import java.util.Date;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -10,10 +9,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import app.core.entities.Entry;
 import lombok.Data;
 
-public class Demo2RestTemplateGet {
+public class Demo4RestTemplateDelete {
 
 	public static void main(String[] args) throws JsonMappingException, JsonProcessingException {
 		System.out.println("=== CLIENT ===");
@@ -21,17 +19,15 @@ public class Demo2RestTemplateGet {
 		RestTemplate rt = new RestTemplate();
 		String baseUrl = "http://localhost:8080/api/dictionary";
 
-		// GET request to fetch Entry
 		{
 
+			// delete an entry
 			try {
-				ResponseEntity<Entry> responseEntity = rt.getForEntity(baseUrl + "/entry?entryId=2", Entry.class);
-				System.out.println(responseEntity.getStatusCode());
-				Entry entry = responseEntity.getBody();
-				System.out.println(entry);
-				System.out.println(entry.getExamples());
+				int id = 2;
+				rt.delete(baseUrl + "?entryId=" + id);
+				System.out.println("deleted: " + id);
+
 			} catch (HttpClientErrorException e) {
-				// use jackson to parse json error to java object
 				ObjectMapper objectMapper = new ObjectMapper();
 				Error err = objectMapper.readValue(e.getResponseBodyAsString(), Error.class);
 				System.out.println("timestamp: " + err.timestamp);

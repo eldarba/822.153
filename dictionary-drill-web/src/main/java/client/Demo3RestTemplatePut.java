@@ -11,9 +11,10 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import app.core.entities.Entry;
+import app.core.entities.Example;
 import lombok.Data;
 
-public class Demo2RestTemplateGet {
+public class Demo3RestTemplatePut {
 
 	public static void main(String[] args) throws JsonMappingException, JsonProcessingException {
 		System.out.println("=== CLIENT ===");
@@ -21,15 +22,21 @@ public class Demo2RestTemplateGet {
 		RestTemplate rt = new RestTemplate();
 		String baseUrl = "http://localhost:8080/api/dictionary";
 
-		// GET request to fetch Entry
 		{
 
 			try {
+				// fetch for entry
 				ResponseEntity<Entry> responseEntity = rt.getForEntity(baseUrl + "/entry?entryId=2", Entry.class);
 				System.out.println(responseEntity.getStatusCode());
 				Entry entry = responseEntity.getBody();
-				System.out.println(entry);
-				System.out.println(entry.getExamples());
+				entry.setDefinition(entry.getDefinition() + " ---|");
+				entry.setWord(entry.getWord() + " ---|");
+				entry.addExample(new Example(0, "this is a new example", null));
+
+				// update entry
+				rt.put(baseUrl, entry);
+				System.out.println("updated to: " + entry);
+
 			} catch (HttpClientErrorException e) {
 				// use jackson to parse json error to java object
 				ObjectMapper objectMapper = new ObjectMapper();

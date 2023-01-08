@@ -16,7 +16,7 @@ public class Demo1RestTemplatePost {
 		RestTemplate rt = new RestTemplate();
 		String baseUrl = "http://localhost:8080/api/dictionary";
 
-		// post a request to the server to add Entry
+		// post a request to the server to add Entry 1
 		{
 			List<Example> examples = new ArrayList<>();
 			examples.add(new Example(0, "that cat climbed the tree", null));
@@ -31,6 +31,7 @@ public class Demo1RestTemplatePost {
 		}
 
 		{
+			// post a request to the server to add Entry 2
 			List<Example> examples = new ArrayList<>();
 			examples.add(new Example(0, "that rabbit ran around the tree", null));
 			examples.add(new Example(0, "that rabbit ate carrot", null));
