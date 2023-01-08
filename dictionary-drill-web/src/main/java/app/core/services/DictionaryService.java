@@ -6,65 +6,65 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import app.core.entities.EntryWord;
-import app.core.entities.ExampleSentence;
+import app.core.entities.Entry;
+import app.core.entities.Example;
 import app.core.exceptions.DictionaryException;
-import app.core.repositories.EntryWordRepository;
-import app.core.repositories.ExampleSentenceRepository;
+import app.core.repositories.EntryRepository;
+import app.core.repositories.ExampleRepository;
 
 @Service
 @Transactional
 public class DictionaryService {
 
 	@Autowired
-	private EntryWordRepository entryWordRepository;
+	private EntryRepository entryRepository;
 	@Autowired
-	private ExampleSentenceRepository exampleSentenceRepository;
+	private ExampleRepository exampleRepository;
 
-	public EntryWord addWordToDictionary(EntryWord entryWord) throws DictionaryException {
-		if (this.entryWordRepository.existsById(entryWord.getId())) {
+	public Entry addEntryToDictionary(Entry entry) throws DictionaryException {
+		if (this.entryRepository.existsById(entry.getId())) {
 			throw new DictionaryException(
-					"addWordToDictionary failed - a word with this id already exists: " + entryWord.getId());
+					"addEntryToDictionary failed - an entry with this id already exists: " + entry.getId());
 		} else {
-			return this.entryWordRepository.save(entryWord);
+			return this.entryRepository.save(entry);
 		}
 	}
 
 	/**
-	 * @param entrywordId
+	 * @param entryId
 	 * @return
-	 * @throws DictionaryException if the specified entry word not exists
+	 * @throws DictionaryException if the specified entry not exists
 	 */
-	public EntryWord getEntryWordById(int entrywordId) throws DictionaryException {
-		return this.entryWordRepository.findById(entrywordId)
-				.orElseThrow(() -> new DictionaryException("getEntryWordById faild - not found: " + entrywordId));
+	public Entry getEntryById(int entryId) throws DictionaryException {
+		return this.entryRepository.findById(entryId)
+				.orElseThrow(() -> new DictionaryException("getEntryById faild - not found: " + entryId));
 	}
 
-	public List<ExampleSentence> getExamplesForEntryWord(int entryWordId) {
-		return this.exampleSentenceRepository.findByEntryWordId(entryWordId);
+	public List<Example> getExamplesForEntry(int entryId) {
+		return this.exampleRepository.findByEntryId(entryId);
 	}
 
 	/**
-	 * @param entryWord
+	 * @param entry
 	 * @return
-	 * @throws DictionaryException if the specified entry word not exists
+	 * @throws DictionaryException if the specified entry not exists
 	 */
-	public EntryWord updateEntryWord(EntryWord entryWord) throws DictionaryException {
-		if (this.entryWordRepository.existsById(entryWord.getId())) {
-			return this.entryWordRepository.save(entryWord);
+	public Entry updateEntry(Entry entry) throws DictionaryException {
+		if (this.entryRepository.existsById(entry.getId())) {
+			return this.entryRepository.save(entry);
 		}
-		throw new DictionaryException("updateEntryWord failed - not found: " + entryWord.getId());
+		throw new DictionaryException("updateEntry failed - not found: " + entry.getId());
 	}
 
 	/**
-	 * @param entryWordId
-	 * @throws DictionaryException if the specified entry word not exists
+	 * @param entryId
+	 * @throws DictionaryException if the specified entry not exists
 	 */
-	public void deleteEntryWordById(int entryWordId) throws DictionaryException {
-		if (this.entryWordRepository.existsById(entryWordId)) {
-			this.entryWordRepository.deleteById(entryWordId);
+	public void deleteEntryById(int entryId) throws DictionaryException {
+		if (this.entryRepository.existsById(entryId)) {
+			this.entryRepository.deleteById(entryId);
 		} else {
-			throw new DictionaryException("deleteEntryWordById failed - not found: " + entryWordId);
+			throw new DictionaryException("deleteEntryById failed - not found: " + entryId);
 		}
 	}
 

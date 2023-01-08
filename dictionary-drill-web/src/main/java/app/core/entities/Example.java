@@ -19,10 +19,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = { "id" })
-@ToString(exclude = { "entryWord" })
-
+@ToString(exclude = { "entry" })
 @Entity
-public class ExampleSentence {
+public class Example {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -31,6 +30,6 @@ public class ExampleSentence {
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn
-	private EntryWord entryWord;
+	private Entry entry;
 
 }
