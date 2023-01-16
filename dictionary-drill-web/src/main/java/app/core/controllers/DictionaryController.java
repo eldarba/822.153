@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import app.core.entities.EntryWord;
-import app.core.entities.ExampleSentence;
+import app.core.entities.Entry;
+import app.core.entities.Example;
 import app.core.exceptions.DictionaryException;
 import app.core.services.DictionaryService;
 
@@ -30,41 +30,41 @@ public class DictionaryController {
 	private DictionaryService dictionaryService;
 
 	@PostMapping("/add-entry")
-	public EntryWord addWordToDictionary(@RequestBody EntryWord entryWord) {
+	public Entry addEntryToDictionary(@RequestBody Entry entry) {
 		try {
-			return this.dictionaryService.addWordToDictionary(entryWord);
+			return this.dictionaryService.addEntryToDictionary(entry);
 		} catch (DictionaryException e) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
 		}
 	}
 
-	@GetMapping("/entry-word")
-	public EntryWord getEntryWordById(@RequestParam int entrywordId) {
+	@GetMapping("/entry")
+	public Entry getEntryById(@RequestParam int entryId) {
 		try {
-			return this.dictionaryService.getEntryWordById(entrywordId);
+			return this.dictionaryService.getEntryById(entryId);
 		} catch (DictionaryException e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
 		}
 	}
 
-	@GetMapping("/examples/{entryWordId}")
-	public List<ExampleSentence> getExamplesForEntryWord(@PathVariable int entryWordId) {
-		return this.dictionaryService.getExamplesForEntryWord(entryWordId);
+	@GetMapping("/examples/{entryId}")
+	public List<Example> getExamplesForEntry(@PathVariable int entryId) {
+		return this.dictionaryService.getExamplesForEntry(entryId);
 	}
 
 	@PutMapping
-	public EntryWord updateEntryWord(@RequestBody EntryWord entryWord) {
+	public Entry updateEntry(@RequestBody Entry entry) {
 		try {
-			return this.dictionaryService.updateEntryWord(entryWord);
+			return this.dictionaryService.updateEntry(entry);
 		} catch (DictionaryException e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
 		}
 	}
 
 	@DeleteMapping
-	public void deleteEntryWordById(int entryWordId) {
+	public void deleteEntryById(int entryId) {
 		try {
-			this.dictionaryService.deleteEntryWordById(entryWordId);
+			this.dictionaryService.deleteEntryById(entryId);
 		} catch (DictionaryException e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
 		}

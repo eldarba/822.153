@@ -11,8 +11,8 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import app.core.entities.EntryWord;
-import app.core.entities.ExampleSentence;
+import app.core.entities.Entry;
+import app.core.entities.Example;
 import app.core.exceptions.DictionaryException;
 import app.core.services.DictionaryService;
 
@@ -28,23 +28,23 @@ class DictionaryDrillWebApplicationTests {
 	void testAddEntryWord() throws DictionaryException {
 		System.out.println("=== start test add new entry word");
 
-		List<ExampleSentence> exampleSentences = new ArrayList<>();
+		List<Example> exampleSentences = new ArrayList<>();
 
-		exampleSentences.add(new ExampleSentence(0, "that cat climbed the tree", null));
-		exampleSentences.add(new ExampleSentence(0, "that cat drank milk", null));
+		exampleSentences.add(new Example(0, "that cat climbed the tree", null));
+		exampleSentences.add(new Example(0, "that cat drank milk", null));
 
-		EntryWord word = new EntryWord(0, "Cat", "a nice animal that do meow", exampleSentences);
+		Entry word = new Entry(0, "Cat", "a nice animal that do meow", exampleSentences);
 
-		word.addExampleSentence(new ExampleSentence(0, "the cat is sleeping", null));
+		word.addExample(new Example(0, "the cat is sleeping", null));
 
-		EntryWord entryWord = dictionary.addWordToDictionary(word);
+		Entry entryWord = dictionary.addEntryToDictionary(word);
 		int expectedEntryWordId = 1;
 		int actualEntryWordId = entryWord.getId();
 		Assertions.assertEquals(expectedEntryWordId, actualEntryWordId, "the first id should be 1");
 
 		System.out.println("=== start test add existing entry word");
 		DictionaryException e = Assertions.assertThrows(DictionaryException.class,
-				() -> dictionary.addWordToDictionary(entryWord));
+				() -> dictionary.addEntryToDictionary(entryWord));
 		System.out.println(e);
 	}
 
@@ -52,13 +52,13 @@ class DictionaryDrillWebApplicationTests {
 	@Order(2)
 	void testFindEntryWord() throws DictionaryException {
 		System.out.println("=== test find existing entry word");
-		EntryWord entryWord = this.dictionary.getEntryWordById(1);
+		Entry entryWord = this.dictionary.getEntryById(1);
 		System.out.println("found: " + entryWord);
 		Assertions.assertNotNull(entryWord);
 		Assertions.assertEquals("Cat", entryWord.getWord());
 		System.out.println("=== test find non existing entry word");
 		DictionaryException e = Assertions.assertThrows(DictionaryException.class,
-				() -> this.dictionary.getEntryWordById(10));
+				() -> this.dictionary.getEntryById(10));
 		System.out.println(e);
 	}
 
@@ -66,9 +66,9 @@ class DictionaryDrillWebApplicationTests {
 	@Order(3)
 	void testDeleteEntryWord() throws DictionaryException {
 		System.out.println("=== test deleting existing entry word");
-		this.dictionary.deleteEntryWordById(1);
+		this.dictionary.deleteEntryById(1);
 		System.out.println("=== test deleting non existing entry word");
-		Exception e = Assertions.assertThrows(DictionaryException.class, () -> this.dictionary.deleteEntryWordById(1));
+		Exception e = Assertions.assertThrows(DictionaryException.class, () -> this.dictionary.deleteEntryById(1));
 		System.out.println(e);
 	}
 
