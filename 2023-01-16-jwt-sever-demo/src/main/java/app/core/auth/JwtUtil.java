@@ -5,7 +5,8 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
-import app.core.auth.User.Role;
+import app.core.entities.User;
+import app.core.entities.User.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 

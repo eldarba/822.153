@@ -5,8 +5,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import app.core.auth.JwtUtil;
-import app.core.auth.User;
-import app.core.auth.User.Role;
+import app.core.entities.User;
+import app.core.entities.User.Role;
 
 @Component
 public class Runner1 implements CommandLineRunner {

@@ -1,6 +1,6 @@
 package app.core.auth;
 
-import app.core.auth.User.Role;
+import app.core.entities.User.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
