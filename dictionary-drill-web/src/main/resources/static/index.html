@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Simple AJAX</h1>
+    <button onclick="rand()">get random number</button>
+    <div id="response">the response</div>
+
+    <script>
+        function rand() {
+            let url = "http://localhost:8080/api/simple";
+            let xhttp = new XMLHttpRequest();
+            xhttp.open("GET", url);
+            xhttp.onload = function () {
+                document.getElementById("response").innerHTML = this.response;
+            }
+            xhttp.send();
+        }
+    </script>
+</body>
+
+</html>
