@@ -65,6 +65,13 @@ public class DemoJwt {
 			// decode the jws
 			Jws<Claims> jwtDecoded = jwtParser.parseClaimsJws(jwtEncoded);
 			System.out.println(jwtDecoded);
+			System.out.println(jwtDecoded.getHeader());
+			System.out.println(jwtDecoded.getBody());
+			System.out.println(jwtDecoded.getSignature());
+
+			// get a specific claim value by claim name:
+			String firstName = jwtDecoded.getBody().get("first name", String.class);
+			System.out.println(firstName);
 
 			// expiration error
 //			Jws<Claims> jwtDecoded = jwtParser.parseClaimsJws(
