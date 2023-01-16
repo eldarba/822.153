@@ -36,8 +36,15 @@ public class DemoJwt {
 		// 3. create a key object
 		Key key = new SecretKeySpec(Base64.getDecoder().decode(secret), alg);
 
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("first name", "Eldar");
+//		map.put("last name", "Bakshi");
+//		map.put("number", 5);
+
 		// create a JWT (token)
 		String jwtEncoded = jwtBuilder
+
+				// .setClaims(map)
 
 				.setSubject("eldarba@gmail.com")
 
