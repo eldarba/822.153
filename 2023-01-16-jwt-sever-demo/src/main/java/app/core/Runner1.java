@@ -2,13 +2,12 @@ package app.core;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 
 import app.core.auth.JwtUtil;
 import app.core.entities.User;
 import app.core.entities.User.Role;
 
-@Component
+//@Component
 public class Runner1 implements CommandLineRunner {
 
 	@Autowired
