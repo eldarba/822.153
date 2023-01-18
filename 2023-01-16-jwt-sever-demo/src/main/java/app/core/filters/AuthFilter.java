@@ -8,9 +8,11 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import app.core.auth.JwtUtil;
@@ -50,15 +52,22 @@ public class AuthFilter implements Filter {
 			try {
 				User user = this.jwtUtil.extractUser(token);
 				System.out.println(user);
+				// 2. pass the request on
+				chain.doFilter(request, response);
 			} catch (Exception e) {
-				System.out.println("invalid token");
+				// 2. OR block the request
+				System.out.println("invalid token: " + e.getMessage());
+				HttpServletResponse resp = (HttpServletResponse) response;
+				resp.sendError(HttpStatus.UNAUTHORIZED.value(), "You need to login - " + e.getMessage());
 			}
 
+		} else {
+			// if we are here the user is not accessing api and can go on
+			chain.doFilter(request, response);
 		}
-		// 2. pass the request on OR block the request
-		chain.doFilter(request, response);
-		// 3. some more actions if needed
 
+		// 3. some more actions if needed
+		System.out.println("filter is done");
 	}
 
 }
