@@ -14,4 +14,9 @@ public class AppController {
 		return "Hello";
 	}
 
+	@GetMapping
+	public String getCoupons() {
+		return "Here are you coupons";
+	}
+
 }
