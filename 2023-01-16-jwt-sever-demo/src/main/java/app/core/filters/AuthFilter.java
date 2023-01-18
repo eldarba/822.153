@@ -13,11 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 
 import app.core.auth.JwtUtil;
 import app.core.entities.User;
 
-//@Component
+@Component
 @Order(1)
 public class AuthFilter implements Filter {
 
@@ -57,6 +58,7 @@ public class AuthFilter implements Filter {
 				// 2. OR block the request
 				System.out.println("invalid token: " + e.getMessage());
 				HttpServletResponse resp = (HttpServletResponse) response;
+				resp.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500"); // for CORS
 				resp.sendError(HttpStatus.UNAUTHORIZED.value(), "You need to login - " + e.getMessage());
 			}
 
