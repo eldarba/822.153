@@ -42,6 +42,7 @@ public class AuthFilter implements Filter {
 
 		// to handle pre-flight requests in case of cross-origin situations
 		if (requestMethod.equalsIgnoreCase("options")) {
+			System.out.println("PREFLIGHT");
 			chain.doFilter(request, response);
 			return;
 		}
