@@ -13,12 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Component;
 
 import app.core.auth.JwtUtil;
 import app.core.entities.User;
 
-@Component
+//@Component
 @Order(1)
 public class AuthFilter implements Filter {
 
@@ -46,7 +45,7 @@ public class AuthFilter implements Filter {
 			return;
 		}
 
-		if (requestUri.contains("/api")) {
+		if (requestUri.contains("/api/app")) {
 			// if user is here they try to access api and we need to check for a valid token
 			String token = req.getHeader("Authorization");
 			try {

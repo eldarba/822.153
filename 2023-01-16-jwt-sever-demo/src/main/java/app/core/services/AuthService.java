@@ -33,6 +33,7 @@ public class AuthService {
 	}
 
 	public String login(UserCredentials userCredentials) throws LoginException {
+		System.out.println(">>>>>>>> login");
 		User user = this.userRepo.findByEmail(userCredentials.getEmail())
 				.orElseThrow(() -> new AuthException("user not found"));
 		if (userCredentials.getPassword().equals(user.getPassword())) {

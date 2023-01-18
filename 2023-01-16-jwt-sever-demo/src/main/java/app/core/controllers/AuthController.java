@@ -4,6 +4,7 @@ import javax.security.auth.login.LoginException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,7 @@ import app.core.auth.UserCredentials;
 import app.core.entities.User;
 import app.core.services.AuthService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
