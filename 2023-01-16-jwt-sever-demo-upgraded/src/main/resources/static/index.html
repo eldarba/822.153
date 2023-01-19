@@ -1,109 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
 
-  <body>
-    <fieldset>
-      <legend>login</legend>
-      <input id="email" type="email" placeholder="e-mail" />
-      <input id="password" type="password" placeholder="password" />
-      <br />
-      <button onclick="login(email.value, password.value)">login</button>
-      <br />
-      <button onclick="logout()">logout</button>
-    </fieldset>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
 
-    <fieldset>
-      <legend>Use API</legend>
-      <button onclick="callGreet()">call greet</button>
-    </fieldset>
-    <fieldset>
-      <legend>response</legend>
-      <div id="resp"></div>
-    </fieldset>
+<body>
+  <fieldset>
+    <legend>register</legend>
+    <input id="reg_email" type="email" placeholder="e-mail" />
+    <input id="reg_password" type="password" placeholder="password" />
+    <input id="reg_firstName" type="text" placeholder="first name" />
+    <input id="reg_lastName" type="text" placeholder="last name" />
+    <input id="reg_username" type="text" placeholder="username" />
+    <label for="reg_role">role</label>
+    <select id="reg_role">
+      <option value="ADMIN">ADMIN</option>
+      <option value="COMPANY">COMPANY</option>
+      <option value="CUSTOMER">CUSTOMER</option>
+    </select>
+    <br />
+    <button onclick="register(reg_email.value, reg_password.value, reg_firstName.value, reg_lastName.value, reg_username.value, reg_role.value)">register</button>
+    <br />
+  </fieldset>
+  
+  <fieldset>
+    <legend>login</legend>
+    <input id="log_email" type="email" placeholder="e-mail" />
+    <input id="log_password" type="password" placeholder="password" />
+    <label for="role">role</label>
+    <select id="log_role">
+      <option value="ADMIN">ADMIN</option>
+      <option value="COMPANY">COMPANY</option>
+      <option value="CUSTOMER">CUSTOMER</option>
+    </select>
+    <br />
+    <button onclick="login(log_email.value, log_password.value, log_role.value)">login</button>
+    <br />
+    <button onclick="logout()">logout</button>
+  </fieldset>
 
-    <script>
-      function callGreet() {
-        let xhttp = new XMLHttpRequest();
-        let url = "http://localhost:8080/api/app";
+  <fieldset>
+    <legend>Use API</legend>
+    <button onclick="callGreet()">call greet</button>
+  </fieldset>
+  <fieldset>
+    <legend>response</legend>
+    <div id="resp"></div>
+  </fieldset>
 
-        xhttp.onload = function () {
-          if (this.status == 200) {
-            document.getElementById("resp").innerHTML = this.response;
-          } else {
-            let errAsJson = this.response;
-            let errAsObject = JSON.parse(errAsJson);
-            console.log(errAsObject);
-            document.getElementById("resp").innerHTML =
-              "ERROR: " + errAsObject.message;
-          }
-        };
+  <script>
+    function callGreet() {
+      let xhttp = new XMLHttpRequest();
+      let url = "http://localhost:8080/api/app";
 
-        xhttp.open("GET", url);
-        xhttp.setRequestHeader(
-          "Authorization",
-          sessionStorage.getItem("token")
-        );
-        xhttp.send();
-      }
-
-      function logout() {
-        sessionStorage.removeItem("token");
-        alert("You are logged out");
-      }
-
-      function login(email, password) {
-        let xhttp = new XMLHttpRequest();
-        let url = "http://localhost:8080/auth/login";
-
-        let userCredentials = new UserCredentials(email, password, "ADMIN");
-        console.log(userCredentials);
-
-        xhttp.onload = function () {
-          if (this.status == 200) {
-            console.log("login success");
-            let token = this.response;
-            console.log(token);
-            // save token in the browser's session storage memory
-            sessionStorage.setItem("token", token);
-          } else {
-            console.log("login failed");
-            alert("Login Failed - try again");
-          }
-        };
-
-        xhttp.onerror = function (ev) {
-          handleNetworkError("login operation attempt error");
-        };
-
-        xhttp.ontimeout = function (ev) {
-          handleNetworkError("login operation attempt timeout");
-        };
-
-        xhttp.open("POST", url);
-        xhttp.setRequestHeader("Content-Type", "application/json");
-        xhttp.send(JSON.stringify(userCredentials));
-      }
-
-      function handleNetworkError(msg) {
-        let resp = document.querySelector("#resp");
-        resp.innerHTML = "Network Error: " + msg + ". check that server is on";
-        setTimeout(() => {
-          resp.innerHTML = null;
-        }, 3000);
-      }
-
-      class UserCredentials {
-        constructor(email, password, role) {
-          this.email = email;
-          this.password = password;
-          this.role = role;
+      xhttp.onload = function () {
+        if (this.status == 200) {
+          document.getElementById("resp").innerHTML = this.response;
+        } else {
+          let errAsJson = this.response;
+          let errAsObject = JSON.parse(errAsJson);
+          console.log(errAsObject);
+          document.getElementById("resp").innerHTML =
+            "ERROR: " + errAsObject.message;
         }
+      };
+
+      xhttp.onerror = (event)=>{
+        handleNetworkError(event.type + " - callGreet failed");
+      };
+
+      xhttp.open("GET", url);
+      xhttp.setRequestHeader(
+        "Authorization",
+        sessionStorage.getItem("token")
+      );
+      xhttp.send();
+    }
+
+    function logout() {
+      sessionStorage.removeItem("token");
+      alert("You are logged out");
+    }
+
+    function login(email, password, role) {
+      let xhttp = new XMLHttpRequest();
+      let url = "http://localhost:8080/auth/login";
+
+      let userCredentials = new UserCredentials(email, password, role);
+      console.log(userCredentials);
+
+      xhttp.onload = function () {
+        if (this.status == 200) {
+          console.log("login success");
+          let token = this.response;
+          console.log(token);
+          // save token in the browser's session storage memory
+          sessionStorage.setItem("token", token);
+        } else {
+          console.log("login failed");
+          alert("Login Failed - try again");
+        }
+      };
+
+      xhttp.onerror = (ev) => {
+        handleNetworkError(ev.type + " - login operation attempt error");
+      };
+
+      xhttp.ontimeout = (ev) => {
+        handleNetworkError(ev.type +  " - login operation attempt timeout");
+      };
+
+      xhttp.open("POST", url);
+      xhttp.setRequestHeader("Content-Type", "application/json");
+      xhttp.send(JSON.stringify(userCredentials));
+    }
+
+    function register(email, password, firstName, lastName, username, role){
+      let xhttp = new XMLHttpRequest();
+      let url = "http://localhost:8080/auth/register";
+      
+      let user = new User(email, password, firstName, lastName, username, role);
+      console.log(user);
+
+      xhttp.onload = function () {
+        if (this.status == 200) {
+          console.log("register success");
+          let token = this.response;
+          console.log(token);
+          // save token in the browser's session storage memory
+          sessionStorage.setItem("token", token);
+        } else {
+          console.log("register failed");
+          alert("Register Failed - try again");
+        }
+      };
+
+      xhttp.onerror = (ev) => {
+        handleNetworkError(ev.type + " - register operation attempt error");
+      };
+
+      xhttp.ontimeout = (ev) => {
+        handleNetworkError(ev.type +  " - register operation attempt timeout");
+      };
+
+      xhttp.open("POST", url);
+      xhttp.setRequestHeader("Content-Type", "application/json");
+      xhttp.send(JSON.stringify(user));
+    }
+
+    function handleNetworkError(msg) {
+      let resp = document.querySelector("#resp");
+      resp.style.color="red";
+      resp.innerHTML = "Network Error: " + msg + ". check that server is on";
+      setTimeout(() => {
+        resp.innerHTML = null;
+        resp.style.color=null;
+      }, 6000);
+    }
+
+    class User{
+      constructor(email, password,firstName,lastName,username, role) {
+        this.email = email;
+        this.password = password;
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.username=username;
+        this.role = role;
       }
-    </script>
-  </body>
+
+    }
+
+    class UserCredentials {
+      constructor(email, password, role) {
+        this.email = email;
+        this.password = password;
+        this.role = role;
+      }
+    }
+  </script>
+</body>
+
 </html>
