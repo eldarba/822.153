@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" onload="setLoggedInMode(false)">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body onload="setLoggedInMode(false)">
+    <fieldset>
+      <legend>Mode</legend>
+      <div id="mode"></div>
+    </fieldset>
+    <fieldset>
+      <legend>register</legend>
+      <input id="reg_email" type="email" placeholder="e-mail" />
+      <input id="reg_password" type="password" placeholder="password" />
+      <input id="reg_firstName" type="text" placeholder="first name" />
+      <input id="reg_lastName" type="text" placeholder="last name" />
+      <input id="reg_username" type="text" placeholder="username" />
+      <label for="reg_role">role</label>
+      <select id="reg_role">
+        <option value="ADMIN">ADMIN</option>
+        <option value="COMPANY">COMPANY</option>
+        <option value="CUSTOMER">CUSTOMER</option>
+      </select>
+      <br />
+      <button
+        onclick="register(reg_email.value, reg_password.value, reg_firstName.value, reg_lastName.value, reg_username.value, reg_role.value)"
+      >
+        register
+      </button>
+      <br />
+    </fieldset>
+
+    <fieldset>
+      <legend>login</legend>
+      <input id="log_email" type="email" placeholder="e-mail" />
+      <input id="log_password" type="password" placeholder="password" />
+      <label for="role">role</label>
+      <select id="log_role">
+        <option value="ADMIN">ADMIN</option>
+        <option value="COMPANY">COMPANY</option>
+        <option value="CUSTOMER">CUSTOMER</option>
+      </select>
+      <br />
+      <button
+        onclick="login(log_email.value, log_password.value, log_role.value)"
+      >
+        login
+      </button>
+      <br />
+      <button onclick="logout()">logout</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>Use General API</legend>
+      <button onclick="callGreet()">call greet</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>Use Admin API</legend>
+      <input type="number" id="companyId" placeholder="company id" />
+      <button onclick="deleteCompany(companyId.value)">delete company</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>Use Company API</legend>
+      <input type="number" id="couponId" placeholder="coupon id" />
+      <button onclick="updateCoupon(couponId.value)">update coupon</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>Use Customer API</legend>
+      <button onclick="getCustomerDetails()">get customer details</button>
+    </fieldset>
+
+    <fieldset>
+      <legend>response</legend>
+      <div id="resp"></div>
+    </fieldset>
+
+    <script src="models.js"></script>
+    <script src="utilFunctions.js"></script>
+    <script src="auth.js"></script>
+    <script src="api-calls.js"></script>
+  </body>
+</html>
