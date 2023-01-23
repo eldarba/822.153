@@ -40,8 +40,8 @@ public class AuthenticationFilter implements Filter {
 				// check for a valid token
 				String authorization = httpRequest.getHeader("Authorization");
 				StringTokenizer tokenizer = new StringTokenizer(authorization);
-				String scheme = tokenizer.nextToken();
-				String token = tokenizer.nextToken();
+				String scheme = tokenizer.nextToken(); // Bearer
+				String token = tokenizer.nextToken(); // the JWT: aaa.bbb.ccc
 				System.out.println("---------- " + scheme);
 				User user = this.jwtUtil.extractUser(token);
 				System.out.println("--- " + user);
@@ -53,16 +53,19 @@ public class AuthenticationFilter implements Filter {
 				System.out.println("--- invalid token: " + e);
 				HttpServletResponse resp = (HttpServletResponse) response;
 				resp.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500"); // for CORS
-				
-				// The HTTP WWW-Authenticate response header defines the HTTP authentication 
-				// methods ("challenges") that might be used to gain access to a specific resource.
+
+				// The HTTP WWW-Authenticate response header defines the HTTP authentication
+				// methods ("challenges") that might be used to gain access to a specific
+				// resource.
 				resp.setHeader("WWW-Authenticate", "Bearer realm=\"General API\"");
-				
-				// The Access-Control-Expose-Headers response header allows a server to indicate which 
-				// response headers should be made available to scripts running in the browser, in 
+
+				// The Access-Control-Expose-Headers response header allows a server to indicate
+				// which
+				// response headers should be made available to scripts running in the browser,
+				// in
 				// response to a cross-origin request.
 				resp.setHeader("Access-Control-Expose-Headers", "*");
-				
+
 				resp.sendError(HttpStatus.UNAUTHORIZED.value(), "You need to login - " + e.getMessage());
 			}
 		}

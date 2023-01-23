@@ -53,7 +53,7 @@ function login(email, password, role) {
       console.log("login failed");
       console.log(this.response);
       let error = JSON.parse(this.response);
-      handleClientError(error.message);
+      handleResponseError(this);
     }
   };
 

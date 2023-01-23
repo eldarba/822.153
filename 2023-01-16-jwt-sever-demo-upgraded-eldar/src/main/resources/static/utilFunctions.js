@@ -23,6 +23,7 @@ function handleResponseError(xhttp) {
 // }
 
 function handleNetworkError(msg) {
+  // let resp = document.getElementById("resp");
   let resp = document.querySelector("#resp");
   resp.style.color = "red";
   resp.innerHTML = "Network Error: " + msg + ". check that server is on";
