@@ -20,9 +20,9 @@ public class Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
-	
+
 	@Bean
-	FilterRegistrationBean<AuthenticationFilter> autneticationFilter(JwtUtil jwtUtil){
+	FilterRegistrationBean<AuthenticationFilter> autneticationFilter(JwtUtil jwtUtil) {
 		AuthenticationFilter authenticationFilter = new AuthenticationFilter(jwtUtil);
 		FilterRegistrationBean<AuthenticationFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(authenticationFilter);
@@ -30,9 +30,9 @@ public class Application {
 		registrationBean.setOrder(1);
 		return registrationBean;
 	}
-	
+
 	@Bean
-	FilterRegistrationBean<AuthorizationFilter> authorizationFilter(){
+	FilterRegistrationBean<AuthorizationFilter> authorizationFilter() {
 		AuthorizationFilter authorizationFilter = new AuthorizationFilter();
 		FilterRegistrationBean<AuthorizationFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(authorizationFilter);
@@ -40,14 +40,14 @@ public class Application {
 		registrationBean.setOrder(2);
 		return registrationBean;
 	}
-	
-	 @Bean
-	    OpenAPI customOpenAPI() {
-	        return new OpenAPI().info(new 
-	             Info().title("title").version("version").description("description"))
-	                .addSecurityItem(new SecurityRequirement().addList("my security"))
-	                .components(new Components().addSecuritySchemes("my security",
-	                        new SecurityScheme().name("my security").type(SecurityScheme.Type.HTTP).scheme("bearer")));
-	    }
+
+	// for swagger authorization
+	@Bean
+	OpenAPI customOpenAPI() {
+		return new OpenAPI().info(new Info().title("title").version("version").description("description"))
+				.addSecurityItem(new SecurityRequirement().addList("my security"))
+				.components(new Components().addSecuritySchemes("my security",
+						new SecurityScheme().name("my security").type(SecurityScheme.Type.HTTP).scheme("bearer")));
+	}
 
 }

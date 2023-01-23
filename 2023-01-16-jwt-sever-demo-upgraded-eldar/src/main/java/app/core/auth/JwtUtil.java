@@ -39,4 +39,14 @@ public class JwtUtil extends JwtUtilAbstract<User, Integer> {
 		return user;
 	}
 
+	public static class Client {
+
+		String email;
+		ClientType clientType;
+
+		public enum ClientType {
+			ADMIN, COMPANY, CUSTOMER;
+		}
+	}
+
 }
