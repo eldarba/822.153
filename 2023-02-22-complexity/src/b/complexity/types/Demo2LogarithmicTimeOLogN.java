@@ -5,6 +5,13 @@ import java.util.Arrays;
 public class Demo2LogarithmicTimeOLogN {
 	static int c = 0;
 
+	/**
+	 * find if an element exist in a sorted int array
+	 * 
+	 * @param arr must be sorted
+	 * @param x
+	 * @return
+	 */
 	static boolean findBinarySearch(int[] arr, int x) {
 		int indMin = 0;
 		int indMax = arr.length - 1;
@@ -32,9 +39,6 @@ public class Demo2LogarithmicTimeOLogN {
 		for (int i = 0; i < arr.length; i++) {
 			arr[i] = (int) (Math.random() * 100000);
 		}
-
-//		arr = new int[] { 3, 3, 3, 6, 19, 24, 26, 27, 37, 47, 51, 55, 63, 65, 66, 66, 66, 72, 81, 81, 87, 92, 92, 96,
-//				100 };
 
 		Arrays.sort(arr);
 
