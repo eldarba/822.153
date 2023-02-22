@@ -5,7 +5,7 @@ function handleResponseError(xhttp) {
   let errAsObject = JSON.parse(errAsJson);
   console.log(errAsObject);
   let errorMessage = "ERROR: " + errAsObject.message;
-  if (xhttp.status == 401) {
+  if (xhttp.status == 401 || xhttp.status == 403) {
     let accessChalenge = xhttp.getResponseHeader("WWW-Authenticate");
     errorMessage += " Access Chalenge: " + accessChalenge;
   }

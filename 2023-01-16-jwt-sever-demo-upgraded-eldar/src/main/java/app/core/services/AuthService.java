@@ -33,12 +33,12 @@ public class AuthService {
 	}
 
 	public String login(UserCredentials userCredentials) throws LoginException {
-		User user = this.userRepo.findByEmail(userCredentials.getEmail())
-				.orElseThrow(() -> new AuthException("loging failed - user with email " + userCredentials.getEmail() + " not found"));
+		User user = this.userRepo.findByEmail(userCredentials.getEmail()).orElseThrow(() -> new AuthException(
+				"loging failed - user with email " + userCredentials.getEmail() + " not found"));
 		if (!userCredentials.getPassword().equals(user.getPassword())) {
 			throw new LoginException("loging failed - wrong password");
 		}
-		if (userCredentials.getRole()!=user.getRole()) {
+		if (userCredentials.getRole() != user.getRole()) {
 			throw new LoginException("loging failed - wrong role");
 		}
 		return this.jwtUtil.generateToken(user);

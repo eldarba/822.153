@@ -36,18 +36,18 @@ public class AuthorizationFilter implements Filter {
 				httpResponse.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500"); // for CORS
 				httpResponse.setHeader("WWW-Authenticate", "Bearer realm=\"ADMIN API\"");
 				httpResponse.setHeader("Access-Control-Expose-Headers", "*");
-				httpResponse.sendError(HttpStatus.UNAUTHORIZED.value(), "Only Admin can access this zone!");
-			}else if (requestUri.contains("/api/company") && user.getRole() != User.Role.COMPANY) {
+				httpResponse.sendError(HttpStatus.FORBIDDEN.value(), "Only Admin can access this zone!");
+			} else if (requestUri.contains("/api/company") && user.getRole() != User.Role.COMPANY) {
 				httpResponse.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500"); // for CORS
 				httpResponse.setHeader("WWW-Authenticate", "Bearer realm=\"COMPANY API\"");
 				httpResponse.setHeader("Access-Control-Expose-Headers", "*");
-				httpResponse.sendError(HttpStatus.UNAUTHORIZED.value(), "Only Company can access this zone!");
-			}else if (requestUri.contains("/api/customer") && user.getRole() != User.Role.CUSTOMER) {
+				httpResponse.sendError(HttpStatus.FORBIDDEN.value(), "Only Company can access this zone!");
+			} else if (requestUri.contains("/api/customer") && user.getRole() != User.Role.CUSTOMER) {
 				httpResponse.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500"); // for CORS
 				httpResponse.setHeader("WWW-Authenticate", "Bearer realm=\"CUSTOMER API\"");
 				httpResponse.setHeader("Access-Control-Expose-Headers", "*");
-				httpResponse.sendError(HttpStatus.UNAUTHORIZED.value(), "Only Cusomer can access this zone!");
-			}else {
+				httpResponse.sendError(HttpStatus.FORBIDDEN.value(), "Only Cusomer can access this zone!");
+			} else {
 				chain.doFilter(request, response);
 			}
 		}
