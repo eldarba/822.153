@@ -2,7 +2,6 @@ package c.queues;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.TimeUnit;
 
 public class Demo2QueueConcurrent {
 
@@ -79,6 +78,11 @@ class Consumer implements Runnable {
 	@Override
 	public void run() {
 		try {
+			// Examine
+			System.out.println(this.queue);
+			System.out.println(this.queue.peek());
+			System.out.println(this.queue);
+
 			System.out.println(this.queue.take());
 			System.out.println(this.queue.take());
 			System.out.println(this.queue.take());
@@ -89,9 +93,14 @@ class Consumer implements Runnable {
 //			System.out.println("attempt to poll without timeout");
 //			System.out.println(this.queue.poll()); // returns an element or null if queue is empty
 
-			System.out.println("attempt to poll with timeout");
-			System.out.println(this.queue.poll(3, TimeUnit.SECONDS));
+//			System.out.println("attempt to poll with timeout");
+//			System.out.println(this.queue.poll(3, TimeUnit.SECONDS));
 
+			// Examine
+			System.out.println(this.queue);
+			System.out.println(this.queue.peek()); // returns null if empty
+//			System.out.println(this.queue.element()); // throws if empty
+			System.out.println(this.queue);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
