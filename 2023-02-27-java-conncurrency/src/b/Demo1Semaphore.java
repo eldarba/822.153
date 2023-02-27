@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Semaphore;
 
-public class Demo4 {
+public class Demo1Semaphore {
 
 	public static void main(String[] args) {
 
