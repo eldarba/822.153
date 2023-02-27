@@ -1,4 +1,4 @@
-package b;
+package b.semaphore;
 
 import java.util.ArrayList;
 import java.util.List;
