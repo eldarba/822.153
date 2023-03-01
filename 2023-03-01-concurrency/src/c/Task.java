@@ -21,19 +21,20 @@ public class Task implements Runnable {
 		try {
 			System.out.println(Thread.currentThread().getName() + " started");
 
-			TimeUnit.SECONDS.sleep((long) (Math.random() * 6) + 1);
+			TimeUnit.SECONDS.sleep((long) (Math.random() * 10) + 1);
 			System.out.println(Thread.currentThread().getName() + " waiting at barier 1");
 			barrier1.await();
 
-			TimeUnit.SECONDS.sleep((long) (Math.random() * 6) + 1);
+			TimeUnit.SECONDS.sleep((long) (Math.random() * 10) + 1);
 			System.out.println(Thread.currentThread().getName() + " waiting at barier 2");
 			barrier2.await();
 
 			// reuse a barrier - therefore cyclic
-			TimeUnit.SECONDS.sleep((long) (Math.random() * 6) + 1);
+			TimeUnit.SECONDS.sleep((long) (Math.random() * 10) + 1);
 			System.out.println(Thread.currentThread().getName() + " waiting at barier 1");
 			barrier1.await();
 
+			System.out.println(Thread.currentThread().getName() + " arrived destination");
 		} catch (InterruptedException | BrokenBarrierException e) {
 			e.printStackTrace();
 		}
