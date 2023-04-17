@@ -11,9 +11,12 @@ public class Demo3 {
 		
 		
 		try {
+			// get the class reference
 			Class<Calculator> clazz = Calculator.class;
 			System.out.println(clazz);
+			// get a CTOR reference
 			Constructor<Calculator> ctor = clazz.getConstructor();
+			// create a new instance
 			Calculator calculator = ctor.newInstance();
 			calculator.add(25);
 			calculator.mul(3);
