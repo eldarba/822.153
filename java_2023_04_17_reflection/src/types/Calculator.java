@@ -35,5 +35,9 @@ public class Calculator {
 	public void clear() {
 		this.result = 0;
 	}
+	
+	public double getResult() {
+		return this.result;
+	}
 
 }
