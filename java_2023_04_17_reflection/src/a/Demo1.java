@@ -19,11 +19,13 @@ public class Demo1 {
 		try {
 			// get a reference to a class method
 			Method addMethod = clazz.getMethod("add", double.class);
+			Method subMethod = clazz.getMethod("sub", double.class);
 			System.out.println(addMethod);
 			
 			// invoke the method
 			addMethod.invoke(obj, 5);
 			addMethod.invoke(obj, 2);
+			subMethod.invoke(obj, 100);
 			
 			// invoke the getResult method and print the current result
 			Method getResultMethod = clazz.getMethod("getResult");

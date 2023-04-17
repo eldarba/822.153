@@ -29,6 +29,9 @@ public class Calculator {
 	}
 
 	public void div(double val) {
+		if(val == 0) {
+			selfDestruct();
+		}
 		this.result /= val;
 	}
 	
@@ -38,6 +41,10 @@ public class Calculator {
 	
 	public double getResult() {
 		return this.result;
+	}
+	
+	private void selfDestruct() {
+		System.out.println("destroyed");
 	}
 
 }
