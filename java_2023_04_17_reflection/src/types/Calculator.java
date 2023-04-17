@@ -4,6 +4,7 @@ public class Calculator {
 
 	// attribute
 	private double result;
+	public boolean on;
 
 	// CTOR 1
 	public Calculator() {
